@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:user_profile_management_app/serviceController/sharedPref_controller.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
- 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,7 +13,10 @@ class HomeScreen extends StatelessWidget {
       ),
       body: Container(
         child: Center(
-          child: Text("Home Screen"),
+          child: Text(
+            "Home Screen",
+            style: TextStyle(fontSize: 50.sp),
+          ),
         ),
       ),
     );

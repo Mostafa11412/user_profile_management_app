@@ -1,4 +1,3 @@
-
 class UserModel {
   int? id;
   String? name;
@@ -9,32 +8,42 @@ class UserModel {
   String? website;
   Company? company;
 
-  UserModel({this.id, this.name, this.username, this.email, this.address, this.phone, this.website, this.company});
+  UserModel(
+      {this.id,
+      this.name,
+      this.username,
+      this.email,
+      this.address,
+      this.phone,
+      this.website,
+      this.company});
 
   UserModel.fromJson(Map<String, dynamic> json) {
-    if(json["id"] is int) {
+    if (json["id"] is int) {
       id = json["id"];
     }
-    if(json["name"] is String) {
+    if (json["name"] is String) {
       name = json["name"];
     }
-    if(json["username"] is String) {
+    if (json["username"] is String) {
       username = json["username"];
     }
-    if(json["email"] is String) {
+    if (json["email"] is String) {
       email = json["email"];
     }
-    if(json["address"] is Map) {
-      address = json["address"] == null ? null : Address.fromJson(json["address"]);
+    if (json["address"] is Map) {
+      address =
+          json["address"] == null ? null : Address.fromJson(json["address"]);
     }
-    if(json["phone"] is String) {
+    if (json["phone"] is String) {
       phone = json["phone"];
     }
-    if(json["website"] is String) {
+    if (json["website"] is String) {
       website = json["website"];
     }
-    if(json["company"] is Map) {
-      company = json["company"] == null ? null : Company.fromJson(json["company"]);
+    if (json["company"] is Map) {
+      company =
+          json["company"] == null ? null : Company.fromJson(json["company"]);
     }
   }
 
@@ -48,12 +57,12 @@ class UserModel {
     _data["name"] = name;
     _data["username"] = username;
     _data["email"] = email;
-    if(address != null) {
+    if (address != null) {
       _data["address"] = address?.toJson();
     }
     _data["phone"] = phone;
     _data["website"] = website;
-    if(company != null) {
+    if (company != null) {
       _data["company"] = company?.toJson();
     }
     return _data;
@@ -68,13 +77,13 @@ class Company {
   Company({this.name, this.catchPhrase, this.bs});
 
   Company.fromJson(Map<String, dynamic> json) {
-    if(json["name"] is String) {
+    if (json["name"] is String) {
       name = json["name"];
     }
-    if(json["catchPhrase"] is String) {
+    if (json["catchPhrase"] is String) {
       catchPhrase = json["catchPhrase"];
     }
-    if(json["bs"] is String) {
+    if (json["bs"] is String) {
       bs = json["bs"];
     }
   }
@@ -102,19 +111,19 @@ class Address {
   Address({this.street, this.suite, this.city, this.zipcode, this.geo});
 
   Address.fromJson(Map<String, dynamic> json) {
-    if(json["street"] is String) {
+    if (json["street"] is String) {
       street = json["street"];
     }
-    if(json["suite"] is String) {
+    if (json["suite"] is String) {
       suite = json["suite"];
     }
-    if(json["city"] is String) {
+    if (json["city"] is String) {
       city = json["city"];
     }
-    if(json["zipcode"] is String) {
+    if (json["zipcode"] is String) {
       zipcode = json["zipcode"];
     }
-    if(json["geo"] is Map) {
+    if (json["geo"] is Map) {
       geo = json["geo"] == null ? null : Geo.fromJson(json["geo"]);
     }
   }
@@ -129,7 +138,7 @@ class Address {
     _data["suite"] = suite;
     _data["city"] = city;
     _data["zipcode"] = zipcode;
-    if(geo != null) {
+    if (geo != null) {
       _data["geo"] = geo?.toJson();
     }
     return _data;
@@ -143,10 +152,10 @@ class Geo {
   Geo({this.lat, this.lng});
 
   Geo.fromJson(Map<String, dynamic> json) {
-    if(json["lat"] is String) {
+    if (json["lat"] is String) {
       lat = json["lat"];
     }
-    if(json["lng"] is String) {
+    if (json["lng"] is String) {
       lng = json["lng"];
     }
   }

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:user_profile_management_app/data/user_model.dart';
 
 class DetailsScreen extends StatelessWidget {
-  const DetailsScreen({super.key});
+  final UserModel user;
+  const DetailsScreen({super.key, required this.user});
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(child: Text(user.name!));
   }
 }

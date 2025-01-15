@@ -4,7 +4,9 @@ import 'package:user_profile_management_app/core/themes/font_theme.dart';
 import 'package:user_profile_management_app/data/user_model.dart';
 import 'package:user_profile_management_app/ui/screens/detailsScreen/detailsScreen.dart';
 
+// UserItem widget to display user information in a list
 class UserItem extends StatelessWidget {
+  // User data model
   final UserModel user;
   const UserItem({super.key, required this.user});
 
@@ -22,6 +24,7 @@ class UserItem extends StatelessWidget {
     );
   }
 
+  // Navigate to the user details screen and send user data
   void _showUser(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(

@@ -24,14 +24,21 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
+      // Design size for screen adaptation
       designSize: const Size(360, 690),
+      // Enable minimum text adaptation
       minTextAdapt: true,
       builder: (context, child) => AdaptiveTheme(
+        // Light theme configuration
         light: klightTheme,
+        // Dark theme configuration
         dark: kDarkTheme,
+        // Initial theme mode based on system settings
         initial: AdaptiveThemeMode.system,
         builder: (theme, darkTheme) => MaterialApp(
+          // Apply the light theme
           theme: theme,
+          // Apply the dark theme
           darkTheme: darkTheme,
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',

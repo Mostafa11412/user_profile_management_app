@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:user_profile_management_app/data/user_model.dart';
-import 'package:user_profile_management_app/serviceController/userServices.dart';
+import 'package:user_profile_management_app/serviceController/sharedPref_controller.dart';
 import 'package:user_profile_management_app/ui/screens/addUserScreen/addUserScreen.dart';
 import 'package:user_profile_management_app/ui/screens/homeScreen/widgets/app_bar.dart';
 import 'package:user_profile_management_app/ui/screens/homeScreen/widgets/fab.dart';
@@ -32,7 +32,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> getUsers() async {
-    users = await UserServices().getUsers();
+    
+    users = await SharedPrefrenceController.getUsers();
     Future.delayed(Duration(seconds: 2), () {
       setState(() {
         _dataLoding = false;
@@ -40,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  void _loadCachedData() {}
+  // void _loadCachedData() {}
 
   @override
   Widget build(BuildContext context) {

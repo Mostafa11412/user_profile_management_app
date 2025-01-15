@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:user_profile_management_app/core/themes/dark_theme.dart';
 import 'package:user_profile_management_app/core/themes/light_theme.dart';
 import 'package:user_profile_management_app/serviceController/sharedPref_controller.dart';
+import 'package:user_profile_management_app/ui/screens/detailsScreen/detailsScreen.dart';
 import 'package:user_profile_management_app/ui/screens/homeScreen/homeScreen.dart';
 
 void main() async {

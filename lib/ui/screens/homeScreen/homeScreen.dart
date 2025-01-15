@@ -47,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       // backgroundColor: kWhite,
-      appBar: CustomAppBar(),
+      appBar: CustomAppBar(title: 'User',showBackButton: false,isCenterTitle: false,),
       body: _body(),
       floatingActionButton: CustomFab(onPress: () => _createUser()),
     );

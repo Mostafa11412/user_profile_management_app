@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:user_profile_management_app/core/themes/font_theme.dart';
 import 'package:user_profile_management_app/data/user_model.dart';
 import 'package:user_profile_management_app/serviceController/userServices.dart';
-import 'package:user_profile_management_app/ui/screens/homeScreen/homeScreen.dart';
+import 'package:user_profile_management_app/ui/screens/homeScreen/home_screen.dart';
 
 class DetailsScreen extends StatelessWidget {
   final UserModel user;

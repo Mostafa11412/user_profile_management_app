@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_offline/flutter_offline.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:user_profile_management_app/data/user_model.dart';
@@ -32,7 +33,6 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> getUsers() async {
-    
     users = await SharedPrefrenceController.getUsers();
     Future.delayed(Duration(seconds: 2), () {
       setState(() {
@@ -41,14 +41,25 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  // void _loadCachedData() {}
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: kWhite,
       appBar: CustomAppBar(),
-      body: _body(),
+      body: OfflineBuilder(
+        connectivityBuilder: (context, value, child) {
+          final bool connected = !value.contains(ConnectivityResult.none);
+          if (connected) {
+            // isOnline = true;
+            // showOfflineWidget = true;
+            // BlocProvider.of<UsersCubit>(context).getUsers();
+            return _body();
+          } //
+          else {
+            return _offlineWidget(context);
+          }
+        },
+        child: const SizedBox(),
+      ),
       floatingActionButton: CustomFab(onPress: () => _createUser()),
     );
   }
@@ -56,20 +67,40 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _body() {
     return Skeletonizer(
       enabled: _dataLoding,
-      child: ListView.builder(
-        padding: EdgeInsets.all(8.r),
-        itemCount: _dataLoding ? 10 : users.length,
-        itemBuilder: (BuildContext context, int index) {
-          return _dataLoding
-              ? UserItem(user: _skeletonizerFakeData)
-              : UserItem(user: users[index]);
-        },
+      child: (!_dataLoding && users.isEmpty)
+          ? Center(child: Text('No Data Found'))
+          : ListView.builder(
+              padding: EdgeInsets.all(8.r),
+              itemCount: _dataLoding ? 10 : users.length,
+              itemBuilder: (BuildContext context, int index) {
+                return _dataLoding
+                    ? UserItem(user: _skeletonizerFakeData)
+                    : UserItem(user: users[index]);
+              },
+            ),
+    );
+  }
+
+  Widget _offlineWidget(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(
+            'assets/images/offline.gif',
+            height: 0.1.sh,
+          ),
+          SizedBox(height: 0.05.sh),
+          const Text('Looks Like You\'re Offline!'),
+          SizedBox(height: 0.05.sh),
+        ],
       ),
     );
   }
 
   void _createUser() {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (route) => AddUserScreen()));
+    Navigator.of(context).push(
+      MaterialPageRoute(builder: (route) => AddUserScreen()),
+    );
   }
 }

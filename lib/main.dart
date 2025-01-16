@@ -4,8 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:user_profile_management_app/core/themes/dark_theme.dart';
 import 'package:user_profile_management_app/core/themes/light_theme.dart';
 import 'package:user_profile_management_app/serviceController/sharedPref_controller.dart';
-import 'package:user_profile_management_app/ui/screens/detailsScreen/detailsScreen.dart';
-import 'package:user_profile_management_app/ui/screens/homeScreen/homeScreen.dart';
+import 'package:user_profile_management_app/ui/screens/homeScreen/home_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -42,7 +41,7 @@ class _MyAppState extends State<MyApp> {
           // Apply the dark theme
           darkTheme: darkTheme,
           debugShowCheckedModeBanner: false,
-          title: 'Flutter Demo',
+          title: 'UPM-API',
           home: HomeScreen(),
         ),
       ),

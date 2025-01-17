@@ -6,6 +6,7 @@ import 'package:user_profile_management_app/data/user_model.dart';
 import 'package:user_profile_management_app/serviceController/sharedPref_controller.dart';
 import 'package:user_profile_management_app/ui/screens/addUserScreen/addUserScreen.dart';
 import 'package:user_profile_management_app/ui/screens/homeScreen/widgets/app_bar.dart';
+import 'package:user_profile_management_app/ui/screens/homeScreen/widgets/btn.dart';
 import 'package:user_profile_management_app/ui/screens/homeScreen/widgets/fab.dart';
 import 'package:user_profile_management_app/ui/screens/homeScreen/widgets/user_item.dart';
 
@@ -17,8 +18,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  bool _dataLoding = true;
+  bool _dataLoading = true;
   List<UserModel> users = [];
+  bool _loadOffline = false;
+  bool _isOnline = true;
 
   static final _skeletonizerFakeData = UserModel(
     id: 1,
@@ -36,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
     users = await SharedPrefrenceController.getUsers();
     Future.delayed(Duration(seconds: 2), () {
       setState(() {
-        _dataLoding = false;
+        _dataLoading = false;
       });
     });
   }
@@ -44,40 +47,44 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
-        title: 'Users',
-      ),
-      body: OfflineBuilder(
-        connectivityBuilder: (context, value, child) {
-          final bool connected = !value.contains(ConnectivityResult.none);
-          if (connected) {
-            // isOnline = true;
-            // showOfflineWidget = true;
-            // BlocProvider.of<UsersCubit>(context).getUsers();
-            return _body();
-          } //
-          else {
-            return _offlineWidget(context);
-          }
-        },
-        child: const SizedBox(),
-      ),
-      floatingActionButton: CustomFab(onPress: () => _createUser()),
+      appBar: CustomAppBar(title: 'Users'),
+      body: _body(),
+      floatingActionButton:
+          _isOnline ? CustomFab(onPress: () => _createUser()) : null,
     );
   }
 
   Widget _body() {
+    return OfflineBuilder(
+      connectivityBuilder: (context, value, child) {
+        final bool connected = !value.contains(ConnectivityResult.none);
+        _isOnline = connected;
+        if (connected) {
+          debugPrint('=====\nONLINE\n=====');
+          _loadOffline = false;
+          return _dataWidget();
+        } //
+        else {
+          debugPrint('=====\nOFFLINE\n=====');
+          return _loadOffline ? _dataWidget() : _offlineWidget(context);
+        }
+      },
+      child: const SizedBox(),
+    );
+  }
+
+  Widget _dataWidget() {
     return Skeletonizer(
-      enabled: _dataLoding,
-      child: (!_dataLoding && users.isEmpty)
+      enabled: _dataLoading,
+      child: (!_dataLoading && users.isEmpty)
           ? Center(child: Text('No Data Found'))
           : ListView.builder(
               padding: EdgeInsets.all(8.r),
-              itemCount: _dataLoding ? 10 : users.length,
+              itemCount: _dataLoading ? 10 : users.length,
               itemBuilder: (BuildContext context, int index) {
-                return _dataLoding
-                    ? UserItem(user: _skeletonizerFakeData)
-                    : UserItem(user: users[index]);
+                return _dataLoading
+                    ? UserItem(user: _skeletonizerFakeData, isOnline: _isOnline)
+                    : UserItem(user: users[index], isOnline: _isOnline);
               },
             ),
     );
@@ -93,16 +100,34 @@ class _HomeScreenState extends State<HomeScreen> {
             height: 0.1.sh,
           ),
           SizedBox(height: 0.05.sh),
-          const Text('Looks Like You\'re Offline!'),
+          const Text(
+            'It Looks Like You\'re Offline!\nYou Can Explore The Saved Data,\nBut You Can\'t Create, Delete or Update.',
+            textAlign: TextAlign.center,
+          ),
           SizedBox(height: 0.05.sh),
+          CustomBtn(label: 'Load Saved Data', onPress: () => _loadSavedData()),
         ],
       ),
     );
   }
 
+  void _loadSavedData() {
+    setState(() {
+      _loadOffline = true;
+    });
+  }
+
   void _createUser() {
-    Navigator.of(context).push(
-      MaterialPageRoute(builder: (route) => AddUserScreen()),
+    _isOnline
+        ? Navigator.of(context).push(
+            MaterialPageRoute(builder: (route) => AddUserScreen()),
+          )
+        : ScaffoldMessenger.of(context).showSnackBar(_snackBar());
+  }
+
+  SnackBar _snackBar() {
+    return SnackBar(
+      content: Text('You\'r Offline'),
     );
   }
 }

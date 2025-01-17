@@ -17,9 +17,9 @@ class FontTheme {
 
   static TextStyle kWhiteTileHeader = TextStyle(fontSize: 14.sp, color: kWhite);
 
-  static TextStyle kBlackTileHeader = TextStyle(fontSize: 14.sp);
+  static TextStyle kBlackTileHeader = TextStyle(fontSize: 14.sp, color: kDark);
 
   static TextStyle kWhiteTileBody = TextStyle(fontSize: 12.sp, color: kWhite);
 
-  static TextStyle kBlackTileBody = TextStyle(fontSize: 12.sp);
+  static TextStyle kBlackTileBody = TextStyle(fontSize: 12.sp, color: kDark);
 }

@@ -5,10 +5,6 @@ import 'package:user_profile_management_app/ui/screens/detailsScreen/user_detail
 
 import '../../../../data/user_model.dart';
 
-
-
-
-
 // A widget to display a user card with basic user information
 class UserCard extends StatelessWidget {
   final UserModel user; // The user data to display in the card
@@ -39,7 +35,8 @@ class UserCard extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => UserDetailScreen(user: user),
+              builder: (context) =>
+                  UserDetailScreen(user: user, isOnline: true),
             ),
           );
         },

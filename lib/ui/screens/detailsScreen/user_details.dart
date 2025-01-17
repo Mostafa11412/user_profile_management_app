@@ -2,7 +2,6 @@ import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:user_profile_management_app/core/colors/colors.dart';
-import 'package:user_profile_management_app/core/themes/font_theme.dart';
 
 import 'package:user_profile_management_app/ui/screens/detailsScreen/widgets/confirmation_dialog.dart';
 import 'package:user_profile_management_app/ui/screens/detailsScreen/widgets/delete_button.dart';
@@ -15,8 +14,10 @@ import 'package:user_profile_management_app/ui/screens/homeScreen/widgets/app_ba
 
 class UserDetailScreen extends StatelessWidget {
   final UserModel user;
+  final bool isOnline;
 
-  const UserDetailScreen({Key? key, required this.user}) : super(key: key);
+  const UserDetailScreen({Key? key, required this.user, required this.isOnline})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,12 @@ class UserDetailScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
-      appBar: CustomAppBar(title: "User Details",showBackButton: true,showThemeIcon: false,isCenterTitle: true,),
+      appBar: CustomAppBar(
+        title: "User Details",
+        showBackButton: true,
+        showThemeIcon: false,
+        isCenterTitle: true,
+      ),
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Column(
@@ -66,7 +72,8 @@ class UserDetailScreen extends StatelessWidget {
                       DetailTile(
                         icon: Icons.home_outlined,
                         label: 'Street',
-                        value: '${user.address?.street ?? 'N/A'}, ${user.address?.suite ?? ''}',
+                        value:
+                            '${user.address?.street ?? 'N/A'}, ${user.address?.suite ?? ''}',
                       ),
                       DetailTile(
                         icon: Icons.location_city_outlined,
@@ -81,7 +88,8 @@ class UserDetailScreen extends StatelessWidget {
                       DetailTile(
                         icon: Icons.explore_outlined,
                         label: 'Coordinates',
-                        value: 'Lat: ${user.address?.geo?.lat ?? 'N/A'}\nLng: ${user.address?.geo?.lng ?? 'N/A'}',
+                        value:
+                            'Lat: ${user.address?.geo?.lat ?? 'N/A'}\nLng: ${user.address?.geo?.lng ?? 'N/A'}',
                       ),
                     ],
                     isLightMode: isLightMode,
@@ -113,7 +121,6 @@ class UserDetailScreen extends StatelessWidget {
                   Row(
                     children: [
                       CustomButton(
-
                         onPressed: () => showDialog(
                           context: context,
                           builder: (_) => DeleteConfirmationDialog(
@@ -121,16 +128,19 @@ class UserDetailScreen extends StatelessWidget {
                             isLightMode: isLightMode,
                           ),
                         ),
-                        isLightMode: isLightMode, title: 'Delete User',
+                        isLightMode: isLightMode,
+                        title: 'Delete User',
                         icon: Icons.delete,
                         width: 5.w,
                         color: Colors.red,
                       ),
-                      SizedBox(width: 22.w,),
+                      SizedBox(
+                        width: 22.w,
+                      ),
                       CustomButton(
-
                         onPressed: () {},
-                        isLightMode: isLightMode, title: 'Update User',
+                        isLightMode: isLightMode,
+                        title: 'Update User',
                         icon: Icons.update,
                         width: 5.w,
                         color: kGreen,

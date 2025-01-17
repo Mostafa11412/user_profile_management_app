@@ -50,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: CustomAppBar(title: 'Users'),
       body: _body(),
       floatingActionButton:
-          _isOnline ? CustomFab(onPress: () => _createUser()) : null,
+          CustomFab(onPress: () => _createUser())  ,
     );
   }
 

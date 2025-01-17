@@ -45,6 +45,7 @@ class UserDetailScreen extends StatelessWidget {
                   InfoSection(
                     title: 'Basic Information',
                     icon: Icons.person_outline,
+                    isLightMode: isLightMode,
                     children: [
                       DetailTile(
                         icon: Icons.account_circle_outlined,
@@ -62,12 +63,12 @@ class UserDetailScreen extends StatelessWidget {
                         value: user.website ?? 'N/A',
                       ),
                     ],
-                    isLightMode: isLightMode,
                   ),
                   SizedBox(height: 20.h),
                   InfoSection(
                     title: 'Address',
                     icon: Icons.location_on_outlined,
+                    isLightMode: isLightMode,
                     children: [
                       DetailTile(
                         icon: Icons.home_outlined,
@@ -92,12 +93,12 @@ class UserDetailScreen extends StatelessWidget {
                             'Lat: ${user.address?.geo?.lat ?? 'N/A'}\nLng: ${user.address?.geo?.lng ?? 'N/A'}',
                       ),
                     ],
-                    isLightMode: isLightMode,
                   ),
                   SizedBox(height: 20.h),
                   InfoSection(
                     title: 'Company',
                     icon: Icons.business_outlined,
+                    isLightMode: isLightMode,
                     children: [
                       DetailTile(
                         icon: Icons.business_center_outlined,
@@ -115,24 +116,28 @@ class UserDetailScreen extends StatelessWidget {
                         value: user.company?.bs ?? 'N/A',
                       ),
                     ],
-                    isLightMode: isLightMode,
                   ),
                   SizedBox(height: 30.h),
                   Row(
                     children: [
                       Expanded(
                         child: CustomButton(
-                          onPressed: () => showDialog(
-                            context: context,
-                            builder: (_) => DeleteConfirmationDialog(
-                              user: user,
-                              isLightMode: isLightMode,
-                            ),
-                          ),
+                          onPressed: () => isOnline
+                              ? showDialog(
+                                  context: context,
+                                  builder: (_) => DeleteConfirmationDialog(
+                                    user: user,
+                                    isLightMode: isLightMode,
+                                  ),
+                                )
+                              : ScaffoldMessenger.of(context)
+                                  .showSnackBar(SnackBar(
+                                  content: Text('You\'r Offline'),
+                                )),
                           isLightMode: isLightMode,
                           title: 'Delete User',
-                          color: isLightMode?kYellow:kYellow,
-                          colorSide: isLightMode?kGreen:Colors.white,
+                          color: isLightMode ? kYellow : kYellow,
+                          colorSide: isLightMode ? kGreen : Colors.white,
                           icon: Icons.delete_rounded,
                           width: double.infinity, // Full width for Expanded
                         ),
@@ -142,18 +147,24 @@ class UserDetailScreen extends StatelessWidget {
                       ),
                       Expanded(
                         child: CustomButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            isOnline
+                                ? null
+                                : ScaffoldMessenger.of(context)
+                                    .showSnackBar(SnackBar(
+                                    content: Text('You\'r Offline'),
+                                  ));
+                          },
                           isLightMode: isLightMode,
                           title: 'Update User',
                           icon: Icons.edit_rounded,
                           color: isLightMode ? kGreen : Colors.black,
-                          colorSide: isLightMode?Colors.white:kGreen,
+                          colorSide: isLightMode ? Colors.white : kGreen,
                           width: double.infinity, // Full width for Expanded
                         ),
                       ),
                     ],
                   ),
-
                 ],
               ),
             ),
@@ -162,4 +173,6 @@ class UserDetailScreen extends StatelessWidget {
       ),
     );
   }
+
+  
 }

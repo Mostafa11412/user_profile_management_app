@@ -44,7 +44,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(),
+      appBar: CustomAppBar(
+        title: 'Users',
+      ),
       body: OfflineBuilder(
         connectivityBuilder: (context, value, child) {
           final bool connected = !value.contains(ConnectivityResult.none);

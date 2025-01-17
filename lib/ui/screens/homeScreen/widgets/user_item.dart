@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:user_profile_management_app/core/themes/font_theme.dart';
 import 'package:user_profile_management_app/data/user_model.dart';
-import 'package:user_profile_management_app/ui/screens/detailsScreen/detailsScreen.dart';
+
+import 'package:user_profile_management_app/ui/screens/detailsScreen/user_details.dart';
 
 // UserItem widget to display user information in a list
 class UserItem extends StatelessWidget {
@@ -28,7 +29,7 @@ class UserItem extends StatelessWidget {
   void _showUser(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (route) => DetailsScreen(user: user),
+        builder: (route) => UserDetailScreen(user: user),
       ),
     );
   }

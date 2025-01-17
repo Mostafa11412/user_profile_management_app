@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:user_profile_management_app/core/colors/colors.dart';
 
 import 'package:user_profile_management_app/ui/screens/detailsScreen/widgets/confirmation_dialog.dart';
-import 'package:user_profile_management_app/ui/screens/detailsScreen/widgets/delete_button.dart';
+import 'package:user_profile_management_app/ui/screens/detailsScreen/widgets/custom_button.dart';
 import 'package:user_profile_management_app/ui/screens/detailsScreen/widgets/details_tile.dart';
 import 'package:user_profile_management_app/ui/screens/detailsScreen/widgets/info_section.dart';
 import 'package:user_profile_management_app/ui/screens/detailsScreen/widgets/user_avatar.dart';
@@ -120,33 +120,40 @@ class UserDetailScreen extends StatelessWidget {
                   SizedBox(height: 30.h),
                   Row(
                     children: [
-                      CustomButton(
-                        onPressed: () => showDialog(
-                          context: context,
-                          builder: (_) => DeleteConfirmationDialog(
-                            user: user,
-                            isLightMode: isLightMode,
+                      Expanded(
+                        child: CustomButton(
+                          onPressed: () => showDialog(
+                            context: context,
+                            builder: (_) => DeleteConfirmationDialog(
+                              user: user,
+                              isLightMode: isLightMode,
+                            ),
                           ),
+                          isLightMode: isLightMode,
+                          title: 'Delete User',
+                          color: isLightMode?kYellow:kYellow,
+                          colorSide: isLightMode?kGreen:Colors.white,
+                          icon: Icons.delete_rounded,
+                          width: double.infinity, // Full width for Expanded
                         ),
-                        isLightMode: isLightMode,
-                        title: 'Delete User',
-                        icon: Icons.delete,
-                        width: 5.w,
-                        color: Colors.red,
                       ),
                       SizedBox(
-                        width: 22.w,
+                        width: 10.w, // Space between buttons
                       ),
-                      CustomButton(
-                        onPressed: () {},
-                        isLightMode: isLightMode,
-                        title: 'Update User',
-                        icon: Icons.update,
-                        width: 5.w,
-                        color: kGreen,
+                      Expanded(
+                        child: CustomButton(
+                          onPressed: () {},
+                          isLightMode: isLightMode,
+                          title: 'Update User',
+                          icon: Icons.edit_rounded,
+                          color: isLightMode ? kGreen : Colors.black,
+                          colorSide: isLightMode?Colors.white:kGreen,
+                          width: double.infinity, // Full width for Expanded
+                        ),
                       ),
                     ],
                   ),
+
                 ],
               ),
             ),

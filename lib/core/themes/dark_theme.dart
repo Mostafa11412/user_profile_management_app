@@ -41,4 +41,16 @@ ThemeData kDarkTheme = ThemeData(
     elevation: 10,
     showCloseIcon: true,
   ),
+  inputDecorationTheme: InputDecorationTheme(
+    focusedBorder: UnderlineInputBorder(
+      borderSide: BorderSide(color: kGreen, width: 2.0), // Focused bottom line
+    ),
+    labelStyle: TextStyle(
+      color: kGrey, // Default label text color
+    ),
+    floatingLabelStyle: TextStyle(
+      color: kGreen, // Label color when focused
+    ),
+    prefixIconColor: kGrey, // Default icon color
+  ),
 );

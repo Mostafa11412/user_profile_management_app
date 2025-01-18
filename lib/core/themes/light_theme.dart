@@ -40,4 +40,16 @@ ThemeData klightTheme = ThemeData(
     elevation: 10,
     showCloseIcon: true,
   ),
+  inputDecorationTheme: InputDecorationTheme(
+    focusedBorder: UnderlineInputBorder(
+      borderSide: BorderSide(color: kGreen, width: 2.0),
+    ),
+    labelStyle: TextStyle(
+      color: kDark,
+    ),
+    floatingLabelStyle: TextStyle(
+      color: kGreen,
+    ),
+    prefixIconColor: kDark,
+  ),
 );

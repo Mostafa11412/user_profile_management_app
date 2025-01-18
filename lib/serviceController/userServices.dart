@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:user_profile_management_app/data/user_model.dart';
+
 import 'package:user_profile_management_app/serviceController/sharedPref_controller.dart';
 
 class UserServices {
@@ -22,10 +24,10 @@ class UserServices {
     try {
       // Fetch users from the API using dio.get() and store the response.
       Response response = await dio.get('/users');
-      
+
       // Convert the API response data to JSON format.
       String data = jsonEncode(response.data);
-      
+
       // Save the fetched users locally to shared preferences.
       SharedPrefrenceController.saveUsers(data);
     } catch (e) {
@@ -34,26 +36,25 @@ class UserServices {
     }
   }
 
-
   Future<void> deleteUser({required int userId}) async {
     String result = '';
 
     try {
       // Send a delete request to the API for the specified userId.
       var response = await dio.delete('/users/$userId');
-      
+
       // Retrieve the status message from the API response.
       result = response.statusMessage ?? "NA";
       debugPrint(result);
 
       // Get the list of users from shared preferences.
       var users = await SharedPrefrenceController.getUsers();
-      
+
       // Remove the user with the matching userId from the list.
       users.removeWhere(
         (element) => element.id == userId,
       );
-      
+
       // Save the updated user list back to shared preferences.
       SharedPrefrenceController.saveUsers(jsonEncode(users));
     } catch (e) {
@@ -64,7 +65,7 @@ class UserServices {
     }
   }
 
-   Future editUser(String name , String user , String email) async {
+  Future editUser(String name, String user, String email) async {
     var data = {
       "name": "$name",
       "username": "$user",
@@ -79,20 +80,30 @@ class UserServices {
     }
   }
 
-   postUser(String name , String user , String email) async {
+  addUser(UserModel user) async {
     var data = {
-      "name": "$name",
-      "username": "$user",
-      "email": "$email",
+      "name": user.name,
+      "usaername": user.username,
+      "email": user.email,
+      "phone": user.phone,
+      "website": user.website,
     };
     try {
-      Response response = await dio.post(endPoint, data: data);
-      print(response.data);
-      print(response.statusMessage);
+      Response response = await dio.post('$baseUrl/users', data: data);
+
+      debugPrint("${response.data}");
+      debugPrint("${response.statusMessage}");
+      var users = await SharedPrefrenceController.getUsers();
+
+      if (response.data != null && response.data['id'] != null) {
+        user.id = users.length + 1;
+      }
+
+      users.add(user);
+
+      SharedPrefrenceController.saveUsers(jsonEncode(users));
     } catch (e) {
-      print(e);
+      debugPrint("${e.toString()}");
     }
   }
-
-
 }

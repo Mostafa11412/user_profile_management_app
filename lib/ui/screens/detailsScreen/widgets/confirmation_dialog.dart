@@ -28,7 +28,7 @@ class DeleteConfirmationDialog extends StatelessWidget {
         padding: EdgeInsets.all(20.w),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20.r),
-          color:kBlack,
+          color: isLightMode ? kWhite : kBlack,
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -36,7 +36,7 @@ class DeleteConfirmationDialog extends StatelessWidget {
             Container(
               padding: EdgeInsets.all(16.w),
               decoration: BoxDecoration(
-                color: Colors.red.withOpacity(0.1),
+                color: const Color.fromRGBO(244, 67, 54, 0.105),
                 shape: BoxShape.circle,
               ),
               child: Icon(

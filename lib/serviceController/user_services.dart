@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:user_profile_management_app/data/user_model.dart';
 import 'package:user_profile_management_app/serviceController/sharedPref_controller.dart';
 
-
 class UserServices {
   static String baseUrl = 'https://jsonplaceholder.typicode.com';
   late Dio dio;
@@ -88,20 +87,28 @@ class UserServices {
 
   addUser(UserModel user) async {
     try {
+      // Send a post request to the API to add new user.
       Response response = await dio.post('/users', data: user.toJson());
 
+      // Print the data and the response status
       debugPrint("${response.data}");
       debugPrint("${response.statusMessage}");
+
+      // Get the list of users from shared preferences.
       var users = await SharedPrefrenceController.getUsers();
 
+      // Check if it is null id
       if (response.data != null && response.data['id'] != null) {
         user.id = users.length + 1;
       }
 
+      // Add the user to the list.
       users.add(user);
 
+      // Save the updated list of users.
       SharedPrefrenceController.saveUsers(jsonEncode(users));
     } catch (e) {
+      // Handle exceptions by throwing a descriptive error.
       debugPrint(e.toString());
     }
   }

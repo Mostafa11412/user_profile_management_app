@@ -9,7 +9,7 @@ class CustomFab extends StatelessWidget {
   Widget build(BuildContext context) {
     return FloatingActionButton(
       onPressed: onPress,
-      backgroundColor: kGreen,
+      backgroundColor: kYellow,
       child: Icon(Icons.add_rounded),
     );
   }

@@ -8,36 +8,61 @@ ThemeData klightTheme = ThemeData(
   useMaterial3: true,
   brightness: Brightness.light,
   scaffoldBackgroundColor: kWhite,
+  //
   appBarTheme: AppBarTheme(
     systemOverlayStyle: SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Brightness.light,
+      statusBarIconBrightness: Brightness.dark,
     ),
-    titleTextStyle: FontTheme.kWhiteHeader,
-    actionsIconTheme: IconThemeData(color: kWhite),
+    titleTextStyle: FontTheme.kBlackHeader,
+    actionsIconTheme: IconThemeData(color: kBlack),
   ),
+  //
   listTileTheme: ListTileThemeData(
     shape: OutlineInputBorder(
       borderSide: BorderSide(color: kGreen, width: 1),
       borderRadius: BorderRadius.circular(10),
     ),
+    leadingAndTrailingTextStyle: FontTheme.kBlackMediumHeader,
+    titleTextStyle: FontTheme.kBlackMediumHeader,
+    subtitleTextStyle: FontTheme.kBlackMediumBody,
   ),
+  //
   floatingActionButtonTheme: FloatingActionButtonThemeData(
-    foregroundColor: kWhite,
+    foregroundColor: kBlack,
   ),
+  //
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
-      backgroundColor: kYellow,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
       minimumSize: Size(0.3.sh, 0.06.sh),
-      textStyle: FontTheme.kBlackTileHeader,
-      foregroundColor: kDark,
+      textStyle: FontTheme.kBlackSnack,
+      foregroundColor: kBlack,
+      iconColor: kBlack,
+      iconSize: 25.sp,
     ),
   ),
+  //
   snackBarTheme: SnackBarThemeData(
     backgroundColor: kYellow,
-    contentTextStyle: FontTheme.kBlackTileHeader,
+    contentTextStyle: FontTheme.kBlackSnack,
     elevation: 10,
     showCloseIcon: true,
+    closeIconColor: kBlack,
+  ),
+  //
+  textTheme: TextTheme(bodyMedium: FontTheme.kBlackMediumBody),
+  //
+  inputDecorationTheme: InputDecorationTheme(
+    focusedBorder: UnderlineInputBorder(
+      borderSide: BorderSide(color: kGreen, width: 2.0),
+    ),
+    labelStyle: TextStyle(
+      color: kDark,
+    ),
+    floatingLabelStyle: TextStyle(
+      color: kGreen,
+    ),
+    prefixIconColor: kDark,
   ),
 );

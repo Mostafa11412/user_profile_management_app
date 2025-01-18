@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:user_profile_management_app/data/user_model.dart';
-import 'package:user_profile_management_app/serviceController/userServices.dart';
+import 'package:user_profile_management_app/serviceController/user_services.dart';
 
 class SharedPrefrenceController {
   static late SharedPreferences prefs;

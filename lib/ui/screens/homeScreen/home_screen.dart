@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_offline/flutter_offline.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skeletonizer/skeletonizer.dart';
+import 'package:user_profile_management_app/core/colors/colors.dart';
 import 'package:user_profile_management_app/data/user_model.dart';
 import 'package:user_profile_management_app/serviceController/sharedPref_controller.dart';
+import 'package:user_profile_management_app/ui/common_widgets/custom_button.dart';
 import 'package:user_profile_management_app/ui/screens/addUserScreen/addUserScreen.dart';
-import 'package:user_profile_management_app/ui/screens/homeScreen/widgets/app_bar.dart';
-import 'package:user_profile_management_app/ui/screens/homeScreen/widgets/btn.dart';
+import 'package:user_profile_management_app/ui/common_widgets/app_bar.dart';
 import 'package:user_profile_management_app/ui/screens/homeScreen/widgets/fab.dart';
 import 'package:user_profile_management_app/ui/screens/homeScreen/widgets/user_item.dart';
 
@@ -47,10 +48,14 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: 'Users'),
+      appBar: CustomAppBar(
+        title: 'Users',
+        showBackButton: false,
+        showThemeIcon: true,
+        isCenterTitle: false,
+      ),
       body: _body(),
-      floatingActionButton:
-          CustomFab(onPress: () => _createUser())  ,
+      floatingActionButton: CustomFab(onPress: () => _createUser()),
     );
   }
 
@@ -100,12 +105,19 @@ class _HomeScreenState extends State<HomeScreen> {
             height: 0.1.sh,
           ),
           SizedBox(height: 0.05.sh),
-          const Text(
+          Text(
             'It Looks Like You\'re Offline!\nYou Can Explore The Saved Data,\nBut You Can\'t Create, Delete or Update.',
             textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.bodyMedium,
           ),
           SizedBox(height: 0.05.sh),
-          CustomBtn(label: 'Load Saved Data', onPress: () => _loadSavedData()),
+          CustomButton(
+            title: 'Load Saved Data',
+            onPressed: () => _loadSavedData(),
+            color: kGreen,
+            colorSide: kWhite,
+            icon: Icons.replay_rounded,
+          ),
         ],
       ),
     );

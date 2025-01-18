@@ -84,4 +84,24 @@ class UserServices {
       throw Exception(e.toString());
     }
   }
+
+  addUser(UserModel user) async {
+    try {
+      Response response = await dio.post('/users', data: user.toJson());
+
+      debugPrint("${response.data}");
+      debugPrint("${response.statusMessage}");
+      var users = await SharedPrefrenceController.getUsers();
+
+      if (response.data != null && response.data['id'] != null) {
+        user.id = users.length + 1;
+      }
+
+      users.add(user);
+
+      SharedPrefrenceController.saveUsers(jsonEncode(users));
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 }

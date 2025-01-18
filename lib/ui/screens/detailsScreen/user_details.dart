@@ -4,14 +4,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:user_profile_management_app/core/colors/colors.dart';
 
 import 'package:user_profile_management_app/ui/screens/detailsScreen/widgets/confirmation_dialog.dart';
-import 'package:user_profile_management_app/ui/screens/detailsScreen/widgets/custom_button.dart';
+import 'package:user_profile_management_app/ui/common_widgets/custom_button.dart';
 import 'package:user_profile_management_app/ui/screens/detailsScreen/widgets/details_tile.dart';
 import 'package:user_profile_management_app/ui/screens/detailsScreen/widgets/info_section.dart';
 import 'package:user_profile_management_app/ui/screens/detailsScreen/widgets/user_avatar.dart';
 
 import 'package:user_profile_management_app/data/user_model.dart';
-import 'package:user_profile_management_app/ui/screens/homeScreen/widgets/app_bar.dart';
-import 'package:user_profile_management_app/ui/screens/updateUserScreen/updateUserScreen.dart';
+import 'package:user_profile_management_app/ui/common_widgets/app_bar.dart';
+import 'package:user_profile_management_app/ui/screens/updateUserScreen/update_user_screen.dart';
 
 class UserDetailScreen extends StatelessWidget {
   final UserModel user;
@@ -135,12 +135,12 @@ class UserDetailScreen extends StatelessWidget {
                                   .showSnackBar(SnackBar(
                                   content: Text('You\'r Offline'),
                                 )),
-                          isLightMode: isLightMode,
+                          // isLightMode: isLightMode,
                           title: 'Delete User',
                           color: isLightMode ? kYellow : kYellow,
                           colorSide: isLightMode ? kGreen : Colors.white,
                           icon: Icons.delete_rounded,
-                          width: double.infinity, // Full width for Expanded
+                          // width: double.infinity, // Full width for Expanded
                         ),
                       ),
                       SizedBox(
@@ -161,12 +161,12 @@ class UserDetailScreen extends StatelessWidget {
                                     content: Text('You\'r Offline'),
                                   ));
                           },
-                          isLightMode: isLightMode,
+                          // isLightMode: isLightMode,
                           title: 'Update User',
                           icon: Icons.edit_rounded,
                           color: isLightMode ? kGreen : Colors.black,
                           colorSide: isLightMode ? Colors.white : kGreen,
-                          width: double.infinity, // Full width for Expanded
+                          // width: double.infinity, // Full width for Expanded
                         ),
                       ),
                     ],

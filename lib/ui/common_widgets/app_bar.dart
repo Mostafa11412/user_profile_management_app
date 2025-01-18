@@ -2,7 +2,6 @@ import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:user_profile_management_app/core/colors/colors.dart';
-import 'package:user_profile_management_app/core/themes/font_theme.dart';
 import 'package:user_profile_management_app/core/themes/theme_controller.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -14,9 +13,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({
     super.key,
     required this.title,
-    this.showThemeIcon = true,
-    this.showBackButton = false,
-    this.isCenterTitle = false,
+    this.showThemeIcon = false,
+    this.showBackButton = true,
+    this.isCenterTitle = true,
   });
 
   @override
@@ -35,42 +34,20 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
       ),
       leading: showBackButton
-          ? Builder(
-        builder: (context) {
-          final isLightMode = AdaptiveTheme.of(context).mode.isLight;
-          return IconButton(
-            icon: Icon(
-              Icons.arrow_back_ios,
-              color: isLightMode ? kWhite : kDark,
-            ),
-            onPressed: () => Navigator.pop(context),
-          );
-        },
-      )
+          ? IconButton(
+              icon: Icon(Icons.arrow_back_ios_rounded),
+              onPressed: () => Navigator.pop(context),
+            )
           : null,
-      title: Builder(
-        builder: (context) {
-          final isLightMode = AdaptiveTheme.of(context).mode.isLight;
-          return Text(
-            title,
-            style: isLightMode ? FontTheme.kWhiteHeader : FontTheme.kBlackHeader,
-          );
-        },
-      ),
+      title: Text(title),
       actions: [
         if (showThemeIcon)
           Padding(
             padding: EdgeInsets.all(8.w),
             child: GestureDetector(
-              child: Builder(
-                builder: (context) {
-                  final isLightMode = AdaptiveTheme.of(context).mode.isLight;
-                  return Icon(
-                    isLightMode ? Icons.sunny : Icons.dark_mode_rounded,
-                    color: isLightMode ? kWhite : kDark,
-                  );
-                },
-              ),
+              child: AdaptiveTheme.of(context).mode.isLight
+                  ? Icon(Icons.dark_mode_rounded)
+                  : Icon(Icons.sunny),
               onTap: () => ThemeController.changeTheme(context),
             ),
           )

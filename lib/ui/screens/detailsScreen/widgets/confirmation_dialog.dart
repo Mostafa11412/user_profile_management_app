@@ -6,17 +6,17 @@ import 'package:user_profile_management_app/ui/screens/homeScreen/home_screen.da
 import '../../../../core/colors/colors.dart';
 import '../../../../core/themes/font_theme.dart';
 import '../../../../data/user_model.dart';
-import '../../../../serviceController/userServices.dart';
+import '../../../../serviceController/user_services.dart';
 
 class DeleteConfirmationDialog extends StatelessWidget {
   final UserModel user;
   final bool isLightMode;
 
   const DeleteConfirmationDialog({
-    Key? key,
+    super.key,
     required this.user,
     required this.isLightMode,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

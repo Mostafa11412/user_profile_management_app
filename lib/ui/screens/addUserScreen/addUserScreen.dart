@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:user_profile_management_app/core/colors/colors.dart';
 import 'package:user_profile_management_app/data/user_model.dart';
-import 'package:user_profile_management_app/serviceController/userServices.dart';
+import 'package:user_profile_management_app/serviceController/user_services.dart';
 import 'package:user_profile_management_app/ui/common_widgets/textField.dart';
 import 'package:user_profile_management_app/ui/common_widgets/custom_button.dart';
 import 'package:user_profile_management_app/ui/screens/homeScreen/home_screen.dart';

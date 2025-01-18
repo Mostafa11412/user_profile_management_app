@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:user_profile_management_app/core/themes/dark_theme.dart';
 import 'package:user_profile_management_app/core/themes/light_theme.dart';
-import 'package:user_profile_management_app/serviceController/sharedpref_controller.dart';
+import 'package:user_profile_management_app/serviceController/shared_pref_controller.dart';
 import 'package:user_profile_management_app/ui/screens/homeScreen/home_screen.dart';
 
 void main() async {

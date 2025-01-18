@@ -50,34 +50,24 @@ class _UpdateUserScreenState extends State<UpdateUserScreen> {
         child: ListView(
           children: [
             CustomTextField(
-              labelText: 'name',
-              iconType: "person",
+              label: 'name',
               controller: _nameController,
-              type: "name",
             ), //
             CustomTextField(
-              labelText: 'username',
-              iconType: "username",
+              label: 'username',
               controller: _usernameController,
-              type: "username",
             ), //
             CustomTextField(
-              labelText: 'email',
-              iconType: "email",
+              label: 'email',
               controller: _emailController,
-              type: "email",
             ), //
             CustomTextField(
-              labelText: 'phone',
-              iconType: "phone",
+              label: 'phone',
               controller: _phoneController,
-              type: "phone",
             ), //
             CustomTextField(
-              labelText: 'website',
-              iconType: "website",
+              label: 'website',
               controller: _websiteController,
-              type: "website",
             ),
             SizedBox(height: 36.h),
             Center(

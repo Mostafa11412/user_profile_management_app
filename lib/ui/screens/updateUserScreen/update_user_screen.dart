@@ -6,6 +6,7 @@ import 'package:user_profile_management_app/serviceController/user_services.dart
 import 'package:user_profile_management_app/ui/common_widgets/textField.dart';
 import 'package:user_profile_management_app/ui/common_widgets/custom_button.dart';
 import 'package:user_profile_management_app/ui/common_widgets/app_bar.dart';
+import 'package:user_profile_management_app/ui/screens/homeScreen/home_screen.dart';
 
 class UpdateUserScreen extends StatefulWidget {
   final UserModel user;
@@ -115,6 +116,12 @@ class _UpdateUserScreenState extends State<UpdateUserScreen> {
         content: Text(txt),
       ),
     );
+    if (txt.contains('Updated')) {
+      Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (route) => HomeScreen()),
+        (route) => false,
+      );
+    }
   }
 
   @override

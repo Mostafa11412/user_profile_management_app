@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:user_profile_management_app/ui/screens/homeScreen/home_screen.dart';
@@ -10,13 +10,8 @@ import '../../../../serviceController/user_services.dart';
 
 class DeleteConfirmationDialog extends StatelessWidget {
   final UserModel user;
-  final bool isLightMode;
 
-  const DeleteConfirmationDialog({
-    super.key,
-    required this.user,
-    required this.isLightMode,
-  });
+  const DeleteConfirmationDialog({super.key, required this.user});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +23,7 @@ class DeleteConfirmationDialog extends StatelessWidget {
         padding: EdgeInsets.all(20.w),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20.r),
-          color:kBlack,
+          color: AdaptiveTheme.of(context).mode.isLight ? kWhite : kBlack,
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -36,7 +31,7 @@ class DeleteConfirmationDialog extends StatelessWidget {
             Container(
               padding: EdgeInsets.all(16.w),
               decoration: BoxDecoration(
-                color: Colors.red.withOpacity(0.1),
+                color: Colors.red.withValues(alpha: 0.1),
                 shape: BoxShape.circle,
               ),
               child: Icon(
@@ -48,16 +43,11 @@ class DeleteConfirmationDialog extends StatelessWidget {
             SizedBox(height: 20.h),
             Text(
               'Delete User',
-              style:
-                  isLightMode ? FontTheme.kBlackHeader : FontTheme.kWhiteHeader,
             ),
             SizedBox(height: 10.h),
             Text(
               'Are you sure you want to delete this user? This action cannot be undone.',
               textAlign: TextAlign.center,
-              style: isLightMode
-                  ? FontTheme.kBlackTileBody
-                  : FontTheme.kWhiteTileBody,
             ),
             SizedBox(height: 24.h),
             Row(
@@ -66,18 +56,19 @@ class DeleteConfirmationDialog extends StatelessWidget {
                 Expanded(
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: isLightMode ? kGreen : kWhite,
                       padding: EdgeInsets.symmetric(vertical: 12.h),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.r),
                       ),
                     ),
                     onPressed: () => Navigator.pop(context),
-                    child: Text('Cancel',
-                        style: TextStyle(
-                            color: isLightMode ? kWhite : kGreen,
-                            fontSize: 20.sp,
-                            fontWeight: FontWeight.bold)),
+                    child: Text(
+                      'Cancel',
+                      style: TextStyle(
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
                 ),
                 SizedBox(width: 16.w),
@@ -92,15 +83,13 @@ class DeleteConfirmationDialog extends StatelessWidget {
                     ),
                     onPressed: () async {
                       await UserServices().deleteUser(userId: user.id!);
+                      if (!context.mounted) return;
                       Navigator.of(context).pushAndRemoveUntil(
                         MaterialPageRoute(builder: (context) => HomeScreen()),
                         (route) => false,
                       );
                     },
-                    child: Text(
-                      'Delete',
-                      style: FontTheme.kWhiteHeader,
-                    ),
+                    child: Text('Delete', style: FontTheme.kWhiteHeader),
                   ),
                 ),
               ],

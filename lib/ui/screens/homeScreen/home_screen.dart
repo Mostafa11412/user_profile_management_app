@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:user_profile_management_app/core/colors/colors.dart';
 import 'package:user_profile_management_app/data/user_model.dart';
-import 'package:user_profile_management_app/serviceController/sharedPref_controller.dart';
+import 'package:user_profile_management_app/serviceController/sharedpref_controller.dart';
 import 'package:user_profile_management_app/ui/common_widgets/custom_button.dart';
 import 'package:user_profile_management_app/ui/screens/addUserScreen/addUserScreen.dart';
 import 'package:user_profile_management_app/ui/common_widgets/app_bar.dart';

@@ -16,8 +16,8 @@ class UserDetailScreen extends StatelessWidget {
   final UserModel user;
   final bool isOnline;
 
-  const UserDetailScreen({Key? key, required this.user, required this.isOnline})
-      : super(key: key);
+  const UserDetailScreen(
+      {super.key, required this.user, required this.isOnline});
 
   @override
   Widget build(BuildContext context) {
@@ -118,53 +118,21 @@ class UserDetailScreen extends StatelessWidget {
                           children: [
                             Expanded(
                               child: CustomButton(
-                                onPressed: () => isOnline
-                                    ? showDialog(
-                                        context: context,
-                                        builder: (_) =>
-                                            DeleteConfirmationDialog(
-                                          user: user,
-                                          isLightMode: isLightMode,
-                                        ),
-                                      )
-                                    : ScaffoldMessenger.of(context)
-                                        .showSnackBar(SnackBar(
-                                        content: Text('You\'r Offline'),
-                                      )),
-                                // isLightMode: isLightMode,
+                                onPressed: () => _delete(context),
                                 title: 'Delete User',
-                                
-                                color: isLightMode ? kGreen : kGreen,
-                                colorSide:
-                                    isLightMode ? Colors.white : Colors.white,
+                                color: kGreen,
+                                colorSide: Colors.white,
                                 icon: Icons.delete_rounded,
-                                // width: double.infinity, // Full width for Expanded
                               ),
                             ),
-                            SizedBox(
-                              width: 10.w, // Space between buttons
-                            ),
+                            SizedBox(width: 10.w),
                             Expanded(
                               child: CustomButton(
-                                onPressed: () {
-                                  isOnline
-                                      ? Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                            builder: (route) =>
-                                                UpdateUserScreen(user: user),
-                                          ),
-                                        )
-                                      : ScaffoldMessenger.of(context)
-                                          .showSnackBar(SnackBar(
-                                          content: Text('You\'r Offline'),
-                                        ));
-                                },
-                                // isLightMode: isLightMode,
+                                onPressed: () => _update(context),
                                 title: 'Update User',
                                 icon: Icons.edit_rounded,
-                                color: kGreen ,
-                                colorSide: isLightMode ? Colors.white : kGreen,
-                                // width: double.infinity, // Full width for Expanded
+                                color: kGreen,
+                                colorSide: kWhite,
                               ),
                             ),
                           ],
@@ -179,5 +147,25 @@ class UserDetailScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void _delete(BuildContext context) {
+    isOnline
+        ? showDialog(
+            context: context,
+            builder: (_) => DeleteConfirmationDialog(user: user),
+          )
+        : ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text('You\'r Offline')));
+  }
+
+  void _update(BuildContext context) {
+    isOnline
+        ? Navigator.of(context).push(
+            MaterialPageRoute(builder: (route) => UpdateUserScreen(user: user)),
+          )
+        : ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('You\'r Offline')),
+          );
   }
 }

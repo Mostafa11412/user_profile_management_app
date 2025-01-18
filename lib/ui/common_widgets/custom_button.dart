@@ -21,7 +21,6 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton.icon(
       onPressed: onPressed,
-
       style: ElevatedButton.styleFrom(
         backgroundColor: color,
         shape: RoundedRectangleBorder(
@@ -30,7 +29,6 @@ class CustomButton extends StatelessWidget {
         ),
       ),
       label: Text(title),
-      // Wrap the icon in an Icon widget
       icon: Icon(icon, size: 25.sp),
     );
   }

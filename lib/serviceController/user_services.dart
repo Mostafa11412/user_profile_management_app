@@ -3,8 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:user_profile_management_app/data/user_model.dart';
-import 'package:user_profile_management_app/serviceController/sharedPref_controller.dart';
-
+import 'package:user_profile_management_app/serviceController/sharedpref_controller.dart';
 
 class UserServices {
   static String baseUrl = 'https://jsonplaceholder.typicode.com';

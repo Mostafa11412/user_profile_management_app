@@ -11,6 +11,7 @@ import 'package:user_profile_management_app/ui/screens/detailsScreen/widgets/use
 
 import 'package:user_profile_management_app/data/user_model.dart';
 import 'package:user_profile_management_app/ui/screens/homeScreen/widgets/app_bar.dart';
+import 'package:user_profile_management_app/ui/screens/updateUserScreen/updateUserScreen.dart';
 
 class UserDetailScreen extends StatelessWidget {
   final UserModel user;
@@ -149,7 +150,12 @@ class UserDetailScreen extends StatelessWidget {
                         child: CustomButton(
                           onPressed: () {
                             isOnline
-                                ? null
+                                ? Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (route) =>
+                                          UpdateUserScreen(user: user),
+                                    ),
+                                  )
                                 : ScaffoldMessenger.of(context)
                                     .showSnackBar(SnackBar(
                                     content: Text('You\'r Offline'),
@@ -173,6 +179,4 @@ class UserDetailScreen extends StatelessWidget {
       ),
     );
   }
-
-  
 }

@@ -9,7 +9,6 @@ ThemeData kDarkTheme = ThemeData(
   brightness: Brightness.dark,
   scaffoldBackgroundColor: kDark,
   appBarTheme: AppBarTheme(
-    // systemOverlayStyle: SystemUiOverlayStyle.dark,
     systemOverlayStyle: SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Brightness.dark,
